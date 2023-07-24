@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="App1_0.Views.Telesales.TelesalesPage"
+            xmlns:vm="clr-namespace:App1_0.ViewModels.Telesales"
+            xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+            Title="Customer Relations"
+            xmlns:popups="clr-namespace:App1_0.Views.Telesales.Popups" 
+             >
+
+    <ContentPage.BindingContext>
+        <vm:TelesalesViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <xct:IntToBoolConverter x:Key="intToBool" />
+        </ResourceDictionary>
+
+        <StyleSheet Source="/Resources/Style.css" />
+
+    </ContentPage.Resources>
+    
+    <StackLayout>
+
+        <Grid Padding="10">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0" >
+
+                <Grid Grid.Row="0" Grid.Column="0" IsVisible="{Binding ShowClientInformation}">
+
+                    <StackLayout Grid.Column="0">
+                        <Label Text="Name" TextColor="#000" FontSize="16" FontAttributes="Bold"/>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1" >
+                        <Label TextColor="#000">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0} {1} {2}">
+                                    <Binding Path="TelesalesClient.TelesalesInformation.Title" />
+                                    <Binding Path="TelesalesClient.TelesalesInformation.FirstName" />
+                                    <Binding Path="TelesalesClient.TelesalesInformation.LastName" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                    </StackLayout>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="0" IsVisible="{Binding ShowClientInformation}">
+
+                    <StackLayout Grid.Column="0">
+                        <Label Text="Address" TextColor="#000" FontSize="16" FontAttributes="Bold"/>
+                    </StackLayout>
+
+                    <StackLayout Grid.Column="1">
+                        <Label TextColor="#000">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0} {1} {2}">
+                                    <Binding Path="TelesalesClient.TelesalesInformation.HouseNumber" />
+                                    <Binding Path="TelesalesClient.TelesalesInformation.Address" />
+                                    <Binding Path="TelesalesClient.TelesalesInformation.Postcode" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                    </StackLayout>
+                </Grid>
+
+                <Grid Grid.Row="2" Grid.Column="0" IsVisible="{Binding ShowClientInformation}">
+                    <StackLayout Grid.Column="0">
+                        <Label Text="Status" TextColor="#000" FontSize="16" FontAttributes="Bold"/>
+                    </StackLayout>
+
+                    <StackLayout Grid.Column="1">
+                        <Label TextColor="#000" Text="{Binding TelesalesClient.TelesalesInformation.Status}"/>
+                    </StackLayout>
+                </Grid>
+
+                <Grid Grid.Row="3" Grid.Column="0" IsVisible="{Binding ShowClientInformation}">
+
+
+                    <StackLayout Grid.Column="0">
+                        <Label Text="Price" TextColor="#000" FontSize="16" FontAttributes="Bold"/>
+                    </StackLayout>
+
+                    <StackLayout Grid.Column="1">
+                        <Label TextColor="#000" Text="{Binding TelesalesClient.TelesalesInformation.Price}"/>
+                    </StackLayout>
+                </Grid>
+
+            </Grid>
+            
+            <Grid Grid.Row="1" Grid.Column="0" >
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="0"  IsVisible="{Binding ShowCallButton}" Orientation="Horizontal">
+                    <Button Text="Call" Command="{Binding CallCommand}" BackgroundColor="Green" HorizontalOptions="FillAndExpand"></Button>
+                </StackLayout>
+
+                <StackLayout Grid.Row="2"  IsVisible="{Binding ShowAfterCallButtons}" Orientation="Horizontal">
+                    <Button Text="Interested" Command="{Binding InterestedButtonCommand}"  BackgroundColor="Green" HorizontalOptions="FillAndExpand"></Button>
+                    <Button Text="Not Interested" Command="{Binding NotInterestedButtonCommand}" BackgroundColor="DarkOrange" HorizontalOptions="FillAndExpand"></Button>
+                    <Button Text="No Answer" Command="{Binding NoAnswerCommand}" BackgroundColor="DarkOrange" HorizontalOptions="FillAndExpand"></Button>
+                </StackLayout>
+
+                <StackLayout Grid.Row="3"  IsVisible="{Binding ShowAfterCallButtons}" Orientation="Horizontal">
+                    <Button Text="Details Incorrect" Command="{Binding DetailsIncorrectCommand}"  BackgroundColor="Brown" HorizontalOptions="FillAndExpand"></Button>
+                    <Button Text="Remove From List" Command="{Binding RemoveFromListCommand}" BackgroundColor="Brown" HorizontalOptions="FillAndExpand"></Button>
+                </StackLayout>
+
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="0" IsVisible="{Binding ShowNoClientsLeft}" >
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Column="0">
+                    <Label Text="No Clients Left" TextColor="#000" FontAttributes="Bold" FontSize="Large"/>
+                </StackLayout>
+
+            </Grid>
+
+        </Grid>
+
+    </StackLayout>
+
+</ContentPage>

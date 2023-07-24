@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    x:Class="App1_0.Views.Telesales.Popups.NoAnswerPage"
+    >
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+
+    <StackLayout  
+        Background="White"
+        VerticalOptions="CenterAndExpand" 
+        HorizontalOptions="FillAndExpand"
+        Margin="20, 20, 20, 20"
+        Padding="20, 20, 20, 20">
+
+        <Label TextColor="#000" Text="Confirm the customer did not answer" FontSize="16" FontAttributes="Bold"/>
+
+        <StackLayout HeightRequest="5"></StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Cancel" Command="{Binding BackButtonCommand}" HorizontalOptions="FillAndExpand"></Button>
+            <Button Text="Confirm" Command="{Binding SubmitButtonCommand}" HorizontalOptions="FillAndExpand"></Button>
+        </StackLayout>
+
+    </StackLayout>
+</pages:PopupPage>

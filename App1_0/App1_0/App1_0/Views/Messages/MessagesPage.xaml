@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="App1_0.Views.Messages.MessagesPage"
+            xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+             Title="Messages" 
+             >
+
+    <ContentPage.Resources>
+
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <xct:IntToBoolConverter x:Key="intToBool" />
+        </ResourceDictionary>
+
+        <StyleSheet Source="/Resources/Style.css" />
+
+    </ContentPage.Resources>
+    
+    <StackLayout Padding="10">
+
+        <Grid HeightRequest="30">
+            <Label Grid.Column="0" Grid.ColumnSpan="3" FontAttributes="Bold" TextColor="Gray" Text="Subject"></Label>
+            <Label Grid.Column="1" FontAttributes="Bold" TextColor="Gray" Text="From"></Label>
+            <Label Grid.Column="2" FontAttributes="Bold"  Margin="15,0,0,0" TextColor="Gray" Text="Date"></Label>
+        </Grid>
+
+        <ListView ItemsSource="{Binding UserMessages}" HasUnevenRows="True" SelectionMode="None">
+            <ListView.Behaviors>
+                <xct:EventToCommandBehavior
+                         EventName="ItemTapped"
+                        Command="{Binding MessageTappedCommand}"
+                        />
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Margin="0,0,0,10">
+                            <StackLayout Grid.Column="0">
+                                <Label FontAttributes="Bold" TextColor="#3e3e3e" Text="{Binding Subject}" FontSize="14"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="1">
+                                <Label FontAttributes="Bold" TextColor="#3e3e3e" Text="{Binding SenderName}" FontSize="14"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="2">
+                                <Label TextColor="#3e3e3e" Text="{Binding SentDate, StringFormat='{0:MMMM dd}'}" FontSize="14"/>
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+        
+    </StackLayout>
+
+</ContentPage>

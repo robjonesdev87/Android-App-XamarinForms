@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "322218762185",
+    "project_id": "ws-renovation",
+    "storage_bucket": "ws-renovation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322218762185:android:d4294059874195baf2d218",
+        "android_client_info": {
+          "package_name": "windowshinerenovation.app1_00"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322218762185-nhr3o5b9iu0e2gfbkrmhtu3o4vmq8st6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALOOVLBlHsZnhTaOJx-VfLbjEZiJ0YnkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322218762185-nhr3o5b9iu0e2gfbkrmhtu3o4vmq8st6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

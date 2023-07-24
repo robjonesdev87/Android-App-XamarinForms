@@ -1,0 +1,36 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App1_0.Views.Surveyor.Tabs.Home"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+             xmlns:vm="clr-namespace:App1_0.ViewModels.Surveyor"
+             Title="Home">
+
+
+    <ContentPage.Resources>
+
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <xct:IntToBoolConverter x:Key="intToBool" />
+        </ResourceDictionary>
+
+        <StyleSheet Source="/Resources/Style.css" />
+    </ContentPage.Resources>
+
+    <StackLayout Orientation="Vertical" Padding="15,15,15,15" Spacing="10">
+
+        <Label Text="{Binding Welcome}" FontSize="16" FontAttributes="Bold" TextColor="Black"></Label>
+
+       
+        <ContentView>
+            <Image Source="windowshinelogo.png" VerticalOptions="Center" HeightRequest="175" />
+        </ContentView>
+
+       
+
+    </StackLayout>
+
+</ContentPage>

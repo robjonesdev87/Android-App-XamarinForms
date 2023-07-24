@@ -1,0 +1,37 @@
+﻿<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="App1_0.Views.Canvas.CanvasDashboardPage"
+            xmlns:vm="clr-namespace:App1_0.ViewModels.Canvas"
+            xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+            xmlns:tabs="clr-namespace:App1_0.Views.Canvas.Tabs"
+
+            Title="Canvaser Dashboard">
+
+    <TabbedPage.BindingContext>
+        <vm:CanvasDashboardViewModel />
+    </TabbedPage.BindingContext>
+
+    <TabbedPage.Resources>
+
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <xct:IntToBoolConverter x:Key="intToBool" />
+        </ResourceDictionary>
+
+        <StyleSheet Source="/Resources/Style.css" />
+
+    </TabbedPage.Resources>
+
+    <tabs:Home/>
+    <tabs:UpcomingPage/>
+    <tabs:LastWeekPage/>
+    <tabs:LastTwoWeeksPage/>
+    
+
+   
+
+</TabbedPage>

@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App1_0.Views.Surveyor.SurveyorSinglePage"
+             xmlns:vm="clr-namespace:App1_0.ViewModels.Surveyor"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+             Title="Appointment Information">
+
+    <ContentPage.BindingContext>
+        <vm:SurveyorSingleViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+
+        <Style x:Key="InvalidEntryStyle"
+               TargetType="Entry">
+            <Setter Property="TextColor" Value="Red"/>
+        </Style>
+
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <xct:IntToBoolConverter x:Key="intToBool" />
+        </ResourceDictionary>
+
+        <StyleSheet Source="/Resources/Style.css" />
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+
+        </Grid.RowDefinitions>
+        <ScrollView Grid.Row="0">
+
+            <StackLayout Orientation="Vertical" Padding="15,15,15,15" Spacing="10">
+                
+                <StackLayout>
+                    <Label Grid.Column="0" TextColor="Black" FontSize="20" FontAttributes="Bold"  Text="{Binding StatusMessage, Mode=OneWay}"></Label>
+                </StackLayout>
+
+                <StackLayout IsVisible="{Binding JobDeclineSectionVisible}">
+                    <Label Text="Reason" StyleClass="custom-label-two"/>
+
+                    <Editor Text="{Binding Job.SurveyData.Reason}" AutoSize="TextChanges" Placeholder="..." TextColor="Black"/>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Button Text="Cancel" Command="{Binding ModalCancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                        <Button Text="Confirm" Command="{Binding JobDeclineCommand}" HorizontalOptions="FillAndExpand"></Button>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout IsVisible="{Binding JobFailureSectionVisible}">
+                    <Label Text="Reason" StyleClass="custom-label-two"/>
+
+                    <Editor Text="{Binding Job.SurveyData.Reason}" AutoSize="TextChanges" Placeholder="..." TextColor="Black"/>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Button Text="Cancel" Command="{Binding ModalCancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                        <Button Text="Confirm" Command="{Binding JobFailureCommand}" HorizontalOptions="FillAndExpand"></Button>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout IsVisible="{Binding HideAll, Converter={StaticResource InvertedBoolConverter}}">
+
+                    <StackLayout IsVisible="{Binding HideSecondStage, Converter={StaticResource InvertedBoolConverter}}">
+
+                        <Label Text="Inventory Required" StyleClass="custom-label-two" />
+
+                        <Editor Text="{Binding InventoryRequired , Mode=TwoWay}" AutoSize="TextChanges" Placeholder="" TextColor="#5d5d5d"/>
+
+                        <Label Text="Measurements" StyleClass="custom-label-two"/>
+
+                        <Editor Text="{Binding Measurements , Mode=TwoWay}" AutoSize="TextChanges" Placeholder="" TextColor="#5d5d5d"/>
+                        <Label Text="Estimated Staff Required" StyleClass="custom-label-two"/>
+
+                        <Entry Text="{Binding EstStaffRequired}" Placeholder="5" Keyboard="Numeric" MaxLength="200" TextColor="#5d5d5d"/>
+
+                        <Label Text="Estimated Cost" StyleClass="custom-label-two"/>
+
+                        <Entry Text="{Binding EstimatedCost}" Placeholder="£3,000" Keyboard="Numeric" MaxLength="200" TextColor="#5d5d5d"/>
+
+                        <Label Text="Notes" StyleClass="custom-label-two" />
+
+                        <Editor Text="{Binding SurveyNotes , Mode=TwoWay}" AutoSize="TextChanges" Placeholder="" TextColor="#5d5d5d"/>
+
+                        <CollectionView ItemsSource="{Binding TakenImages, Mode=TwoWay}" 
+                        ItemsLayout="VerticalGrid, 3"
+                        ItemSizingStrategy="MeasureAllItems" 
+                        SelectionMode="Single"
+                        SelectionChangedCommand="{Binding ImageTappedCommand}"
+                        SelectedItem="{Binding SelectedImage, Mode=TwoWay}"
+                        HeightRequest="{Binding CollectionViewHeight, Mode=TwoWay}"
+                        >
+                            <CollectionView.Behaviors>
+                            </CollectionView.Behaviors>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="10" Margin="0" HeightRequest="100">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="130" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Margin="0">
+                                            <Image Grid.Row="0" Source="{Binding Path}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
+                                            <Label Grid.Row="1" Text="{Binding Name}" FontSize="14" TextColor="Black" FontAttributes="Bold"  VerticalOptions="Start"/>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Button Text="Take Photos" Background="Orange" Command="{Binding TakePhotoCommand}" HorizontalOptions="FillAndExpand"></Button>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Button Text="Customer Declined" Command="{Binding ModalPopupCommand}" HorizontalOptions="FillAndExpand"></Button>
+                            <Button Text="Complete Survey" Command="{Binding JobCompleteCommand}" HorizontalOptions="FillAndExpand"></Button>
+                        </StackLayout>
+
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Appointment Information" StyleClass="custom-label"/>
+
+                        <Grid>
+                            <Label Grid.Column="0" FontAttributes="Bold" Text="Confirm With" TextColor="Black"></Label>
+                            <Label Grid.Column="1" Text="{Binding Client.Information.ConfirmWith, StringFormat='{0:MMMM dd}'}" TextColor="#5d5d5d"></Label>
+                        </Grid>
+
+                        <Grid>
+                            <Label Grid.Column="0" FontAttributes="Bold" Text="Appointment Date" TextColor="Black"></Label>
+                            <Label Grid.Column="1" Text="{Binding Job.SurveyData.AppointmentDate, StringFormat='{0:MMMM dd}'}" TextColor="#5d5d5d"></Label>
+                        </Grid>
+
+                        <Grid>
+                            <Label Grid.Column="0" FontAttributes="Bold" Text="Appointment Time" TextColor="Black"></Label>
+                            <Label Grid.Column="1" Text="{Binding Job.SurveyData.AppointmentTime}" TextColor="#5d5d5d"></Label>
+                        </Grid>
+                        <Grid>
+                            <Label Grid.Column="0" FontAttributes="Bold" Text="Notes From Admin" TextColor="Black"></Label>
+                        </Grid>
+
+                        <Grid>
+                            <Label Grid.Column="0" Text="{Binding Job.SurveyData.AdminNotes}" TextColor="#5d5d5d"></Label>
+                        </Grid>
+
+                        <Label Text="Client Information" StyleClass="custom-label"/>
+
+                        <Grid>
+                            <Label Grid.Column="0" FontAttributes="Bold" Text="Full Name" TextColor="Black"></Label>
+                            <Label Grid.Column="1" TextColor="#5d5d5d">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0} {1} {2}">
+                                        <Binding Path="Client.Information.Title" />
+                                        <Binding Path="Client.Information.FirstName" />
+                                        <Binding Path="Client.Information.LastName" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                        </Grid>
+
+                        <Grid>
+                            <Label Grid.Column="0" FontAttributes="Bold" Text="Mobile Number" TextColor="Black"></Label>
+                            <Label Grid.Column="1" Text="{Binding Client.Information.MobileNumber}" TextColor="#5d5d5d"></Label>
+                        </Grid>
+
+                        <Grid>
+                            <Label Grid.Column="0" FontAttributes="Bold" Text="Service Required" TextColor="Black"></Label>
+                            <Label Grid.Column="1" Text="{Binding Client.Information.ServiceRequired}" TextColor="#5d5d5d"></Label>
+                        </Grid>
+
+                        <Grid>
+                            <Label Grid.Column="0" FontAttributes="Bold" Text="Est Service Required" TextColor="Black"></Label>
+                            <Label Grid.Column="1" Text="{Binding Client.Information.EstServicesRequired}" TextColor="#5d5d5d"></Label>
+                        </Grid>
+
+                        <Grid>
+                            <Label Grid.Column="0" FontAttributes="Bold" Text="Est Age" TextColor="Black"></Label>
+                            <Label Grid.Column="1" Text="{Binding Client.Information.EstAge}" TextColor="#5d5d5d"></Label>
+                        </Grid>
+
+                        <Grid>
+                            <Label Grid.Column="0" FontAttributes="Bold" Text="Est Occupation" TextColor="Black"></Label>
+                            <Label Grid.Column="1" Text="{Binding Client.Information.EstOccupation}" TextColor="#5d5d5d"></Label>
+                        </Grid>
+
+                        <Grid>
+                            <Label Grid.Column="0" FontAttributes="Bold" Text="House No." TextColor="Black"></Label>
+                            <Label Grid.Column="1" Text="{Binding Client.Information.HouseNumber}" TextColor="#5d5d5d"></Label>
+                        </Grid>
+
+                        <Grid>
+                            <Label Grid.Column="0" FontAttributes="Bold" Text="Address" TextColor="Black"></Label>
+                            <Label Grid.Column="1" Text="{Binding Client.Information.Address}" TextColor="#5d5d5d"></Label>
+                        </Grid>
+
+                        <Grid>
+                            <Label Grid.Column="0" FontAttributes="Bold" Text="Postcode" TextColor="Black"></Label>
+                            <Label Grid.Column="1" Text="{Binding Client.Information.Postcode}" TextColor="#5d5d5d"></Label>
+                        </Grid>
+
+                        <Grid>
+                            <Label Grid.Column="0" FontAttributes="Bold" Text="Type of House" TextColor="Black"></Label>
+                            <Label Grid.Column="1" Text="{Binding Client.Information.TypeOfHouse}" TextColor="#5d5d5d"></Label>
+                        </Grid>
+
+                        <StackLayout IsVisible="{Binding HideAcceptButtons, Converter={StaticResource InvertedBoolConverter}}" Orientation="Horizontal">
+                            <Button Text="Reject Appointment" Command="{Binding ModalPopupCommand}" HorizontalOptions="FillAndExpand"></Button>
+                            <Button Text="Accept Appointment" Command="{Binding JobAcceptCommand}" HorizontalOptions="FillAndExpand"></Button>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout IsVisible="{Binding ShowSuccessFields}">
+
+                    <Label Text="Personal Information" StyleClass="custom-label"/>
+
+                    <Grid>
+                        <Label Grid.Column="0" FontAttributes="Bold" Text="Full Name" TextColor="Black"></Label>
+                        <Label Grid.Column="1" TextColor="#5d5d5d">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0} {1} {2}">
+                                    <Binding Path="Client.Information.Title" />
+                                    <Binding Path="Client.Information.FirstName" />
+                                    <Binding Path="Client.Information.LastName" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                    </Grid>
+
+                    <Label Text="Appointment Information" StyleClass="custom-label"/>
+
+
+                    <Label Text="Status" StyleClass="custom-label"/>
+                    <Label Text="{Binding Job.Status}"/>
+
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

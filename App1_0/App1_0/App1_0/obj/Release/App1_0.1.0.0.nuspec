@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>App1_0</id>
+    <version>1.0.0</version>
+    <authors>App1_0</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Microsoft.CSharp" version="4.7.0" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="13.0.1" exclude="Build,Analyzers" />
+        <dependency id="RestSharp" version="108.0.1" exclude="Build,Analyzers" />
+        <dependency id="Xam.Plugins.Settings" version="3.1.1" exclude="Build,Analyzers" />
+        <dependency id="Xamarin.CommunityToolkit" version="2.0.4" exclude="Build,Analyzers" />
+        <dependency id="Xamarin.Essentials" version="1.7.0" exclude="Build,Analyzers" />
+        <dependency id="Xamarin.Forms" version="5.0.0.2515" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\zxr\source\repos\WindowShineApp\App1_0\App1_0\App1_0\bin\Release\netstandard2.0\App1_0.dll" target="lib\netstandard2.0\App1_0.dll" />
+  </files>
+</package>

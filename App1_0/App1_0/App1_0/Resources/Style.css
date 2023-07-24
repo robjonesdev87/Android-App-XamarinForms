@@ -1,0 +1,68 @@
+﻿.custom-label {
+    text-align: left;
+    font-size: 16;
+    color: #FFFFFF;
+    background-color: #34495E;
+    padding: 5;
+    text-transform: uppercase;
+    margin-top: 10;
+    margin-bottom: 5;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.custom-label-two {
+    text-align: left;
+    font-style: bold;
+    text-transform: uppercase;
+    font-size: 14;
+    color: #404040;
+    background-color: transparent;
+}
+
+.switch-label {
+    font-size: 16;
+    color: #34495E;
+    -xf-placeholder-color: #808080;
+}
+
+.date-label {
+    font-size: 16;
+    color: #34495E;
+    -xf-placeholder-color: #808080;
+    padding: 5;
+    margin: 0;
+}
+
+^Entry {
+    color: #808080;
+    font-size: 14;
+    -xf-placeholder-color: #808080;
+    -moz-placeholder: #808080;
+    webkit-input-placeholder: #808080;
+    -ms-input-placeholder: #808080;
+}
+
+^Picker {
+    font-size: 14;
+    color: #808080;
+}
+
+^Editor {
+    font-size: 14;
+    -xf-placeholder-color: #808080;
+    color: #808080;
+}
+
+^Switch {
+    font-size: 14;
+    color: #808080;
+}
+
+^DatePicker {
+    font-size: 14;
+    -xf-placeholder-color: #808080;
+    color: #808080;
+}
+
+

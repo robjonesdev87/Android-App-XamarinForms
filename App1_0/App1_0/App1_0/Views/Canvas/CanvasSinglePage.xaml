@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App1_0.Views.Canvas.CanvasSinglePage"
+             xmlns:vm="clr-namespace:App1_0.ViewModels.Canvas"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+             Title="Client Information">
+    
+    <ContentPage.BindingContext>
+        <vm:CanvasSingleViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+
+        <Style x:Key="InvalidEntryStyle"
+               TargetType="Entry">
+            <Setter Property="TextColor" Value="Red"/>
+        </Style>
+
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <xct:IntToBoolConverter x:Key="intToBool" />
+        </ResourceDictionary>
+
+        <StyleSheet Source="/Resources/Style.css" />
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            
+        </Grid.RowDefinitions>
+        <ScrollView Grid.Row="1">
+
+            <StackLayout Orientation="Vertical" Padding="15,15,15,15" Spacing="10">
+
+                <StackLayout IsVisible="{Binding CanvasComplete}">
+                    <Label Grid.Column="0" FontSize="18" TextColor="#009c41" FontAttributes="Bold" Text="No further action required by you"></Label>
+                </StackLayout>
+
+                <Grid>
+                    <StackLayout Grid.Column="0">
+                        <Label Grid.Column="0" FontAttributes="Bold" Text="Client created at" TextColor="Black"></Label>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1">
+                        <Label Text="{Binding GetClientWithId.Information.CreationDate, StringFormat='{0:MMMM d, yyyy HH:mm}'}" TextColor="#5d5d5d"></Label>
+                    </StackLayout>
+                </Grid>
+
+                <StackLayout IsVisible="{Binding CanvasComplete, Converter={StaticResource InvertedBoolConverter}}">
+
+                    <Label Text="Extra Information" StyleClass="custom-label"/>
+
+                    <Label Text="First Name" StyleClass="custom-label-two"/>
+
+                    <Entry Text="{Binding GetClientWithId.Information.FirstName , Mode=TwoWay}"  Placeholder="Joe.."  Keyboard="Text" TextColor="Black">
+                    </Entry>
+                    
+                    <Label Text="Estimated Age" StyleClass="custom-label-two"/>
+
+                    <Entry Text="{Binding GetClientWithId.Information.EstAge}"  Placeholder="22.." Keyboard="Numeric" MaxLength="11" TextColor="Black">
+                        <Entry.Behaviors>
+                            <xct:CharactersValidationBehavior
+                                CharacterType="Digit"
+                                MaximumCharacterCount="3"
+                            />
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    <Label Text="Estimated Occupation" StyleClass="custom-label-two"/>
+
+                    <Entry Text="{Binding GetClientWithId.Information.EstOccupation}"  Placeholder="Joiner.." Keyboard="Text" MaxLength="250" TextColor="Black">
+                        <Entry.Behaviors>
+                            <xct:CharactersValidationBehavior
+                                MaximumLength="250"
+                                MinimumLength="1"
+                            />
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    <Label Text="Estimated Services Required" StyleClass="custom-label-two"/>
+
+                    <Entry Text="{Binding GetClientWithId.Information.EstServicesRequired}"  Placeholder="New windows.." Keyboard="Text" MaxLength="250" TextColor="Black">
+                        <Entry.Behaviors>
+                            <xct:CharactersValidationBehavior
+                                MaximumLength="250"
+                                MinimumLength="1"
+                            />
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    <Label Text="Notes" StyleClass="custom-label-two"/>
+
+                    <Editor Text="{Binding GetClientWithId.Information.Notes , Mode=TwoWay}" AutoSize="TextChanges" Placeholder="..." TextColor="Black"/>
+
+                    <CollectionView ItemsSource="{Binding TakenImages, Mode=TwoWay}" 
+                        ItemsLayout="VerticalGrid, 3"
+                        ItemSizingStrategy="MeasureAllItems" 
+                        SelectionMode="Single"
+                        SelectionChangedCommand="{Binding ImageTappedCommand}"
+                        SelectedItem="{Binding SelectedImage, Mode=TwoWay}"
+                        HeightRequest="{Binding CollectionViewHeight, Mode=TwoWay}"
+                        >
+                        <CollectionView.Behaviors>
+                        </CollectionView.Behaviors>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="10" Margin="0" HeightRequest="100">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="130" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Margin="0">
+                                        <Image Grid.Row="0" Source="{Binding Path}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
+                                        <Label Grid.Row="1" Text="{Binding Name}" FontSize="14" TextColor="Black" FontAttributes="Bold"  VerticalOptions="Start"/>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Button Text="Take Photos" Background="Orange" Command="{Binding TakePhotoCommand}" HorizontalOptions="FillAndExpand"></Button>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                        <Button Text="Update Client" Command="{Binding UpdateCommand}" HorizontalOptions="FillAndExpand"></Button>
+                    </StackLayout>
+
+                </StackLayout>
+
+                <StackLayout IsVisible="{Binding CanvasComplete}">
+
+                    <Label Text="Client Information" StyleClass="custom-label"/>
+
+                    <Grid>
+                        <Label Grid.Column="0" FontAttributes="Bold" Text="Full Name" TextColor="Black"></Label>
+                        <Label Grid.Column="1" TextColor="#5d5d5d">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0} {1} {2}">
+                                    <Binding Path="GetClientWithId.Information.Title" />
+                                    <Binding Path="GetClientWithId.Information.FirstName" />
+                                    <Binding Path="GetClientWithId.Information.LastName" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                    </Grid>
+
+                    <Label Text="Appointment Information" StyleClass="custom-label"/>
+
+                    <Grid>
+                        <Label Grid.Column="0" FontAttributes="Bold" Text="Suggested Appointment Date" TextColor="Black"></Label>
+                        <Label Grid.Column="1" Text="{Binding GetClientWithId.CanvasData.AppointmentDate, StringFormat='{0:MMMM dd}'}" TextColor="#5d5d5d"></Label>
+                    </Grid>
+
+                    <Grid>
+                        <Label Grid.Column="0" FontAttributes="Bold" Text="Suggested Appointment Time" TextColor="Black"></Label>
+                        <Label Grid.Column="1" Text="{Binding GetClientWithId.CanvasData.AppointmentTime}" TextColor="#5d5d5d"></Label>
+                    </Grid>
+
+                    <Label Text="Client Status" StyleClass="custom-label"/>
+
+                    <Grid>
+                        <StackLayout Grid.Column="0">
+                            <Label FontAttributes="Bold" FontSize="16" Text="####" TextColor="Black"></Label>
+                        </StackLayout>
+                    </Grid>
+
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

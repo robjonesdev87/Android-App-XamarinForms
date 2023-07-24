@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App1_0.Views.Canvas.CanvasAddLeadPage"
+             Shell.PresentationMode="ModalAnimated"
+             Title="Add Client"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:viewmodels="clr-namespace:App1_0.ViewModels.Canvas" 
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             ios:Page.UseSafeArea="true">
+
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle"
+               TargetType="Entry">
+            <Setter Property="TextColor" Value="Red"/>
+        </Style>
+        <StyleSheet Source="/Resources/Style.css" />
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="invertBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        
+        <ScrollView>
+            <StackLayout Spacing="3" Padding="15" BackgroundColor="White">
+
+                <Label Text="Details" StyleClass="custom-label"/>
+
+                <Label Text="Title" StyleClass="custom-label-two"/>
+
+                <Picker
+                    Title="Title"
+                    ItemsSource="{Binding Information.TitlesCollection}"
+                    SelectedItem="{Binding Information.Title}"
+                    TitleColor="#808080"
+                />
+
+                <Label Text="Surname" StyleClass="custom-label-two"/>
+
+                <Entry Text="{Binding Information.LastName , Mode=TwoWay}"  Placeholder="Blogs.." Keyboard="Text" TextColor="Black">
+                    <Entry.Behaviors>
+                        <xct:TextValidationBehavior 
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            MaximumLength="30"
+                            MinimumLength="1"
+                            IsValid="{Binding ClientValidation.LastNameValid}"
+                            />
+                    </Entry.Behaviors>
+                </Entry>
+
+                <Label Text="Last Name cannot be empty" TextColor="Red" IsVisible="{Binding ClientValidation.LastNameValid, Converter={StaticResource invertBoolConverter}}"/>
+
+                <Label Text="Service Required" StyleClass="custom-label-two"/>
+
+                <Entry Text="{Binding Information.ServiceRequired , Mode=TwoWay}"  Placeholder="House Renovations..." Keyboard="Text" TextColor="Black">
+                    <Entry.Behaviors>
+                        <xct:TextValidationBehavior 
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            MaximumLength="30"
+                            MinimumLength="1"
+                            />
+                    </Entry.Behaviors>
+                </Entry>
+                
+                <Label Text="Landline Number" StyleClass="custom-label-two"/>
+
+                <Entry Text="{Binding Information.LandlineNumber , Mode=TwoWay}"  Placeholder="01253 333xxx" Keyboard="Numeric" MaxLength="11" TextColor="Black">
+                    <Entry.Behaviors>
+                        <xct:CharactersValidationBehavior
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            CharacterType="Digit"
+                            MaximumCharacterCount="11"
+                        />
+                    </Entry.Behaviors>
+                </Entry>
+
+
+                <Label Text="Mobile Number" StyleClass="custom-label-two"/>
+
+                <Entry Text="{Binding Information.MobileNumber , Mode=TwoWay}"  Placeholder="07496xxxxxx" Keyboard="Numeric"  MaxLength="11" TextColor="Black">
+                    <Entry.Behaviors>
+                        <xct:CharactersValidationBehavior
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            CharacterType="Digit"
+                            MaximumCharacterCount="11"
+                        />
+                    </Entry.Behaviors>
+                </Entry>
+
+
+                <Label Text="Email Address" StyleClass="custom-label-two"/>
+
+                <Entry Text="{Binding Information.EmailAddress , Mode=TwoWay}"  Placeholder="joeblogs@gmail.com" Keyboard="Email" TextColor="Black">
+                    <Entry.Behaviors>
+                        <xct:EmailValidationBehavior
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            DecorationFlags="Trim"
+                        />
+                    </Entry.Behaviors>
+                </Entry>
+
+                <Label Text="Confirm With" StyleClass="custom-label-two"/>
+
+                <Entry Text="{Binding Information.ConfirmWith , Mode=TwoWay}"  Placeholder="Mr.." Keyboard="Email" TextColor="Black">
+                </Entry>
+                
+                <Label Text="Property Details"  StyleClass="custom-label"/>
+
+                <Label Text="Property Number" StyleClass="custom-label-two"/>
+
+                <Entry Text="{Binding Information.HouseNumber}" Placeholder="55.." Keyboard="Numeric" TextColor="Black">
+                    <Entry.Behaviors>
+                        <xct:CharactersValidationBehavior
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            CharacterType="Digit"
+                            MaximumCharacterCount="4"
+                        />
+                    </Entry.Behaviors>
+                </Entry>
+
+                <Label Text="Street Name" StyleClass="custom-label-two"/>
+
+                <Entry Text="{Binding Information.Address}" Placeholder="Pickmere Avenue.." TextColor="Black">
+                    <Entry.Behaviors>
+                        <xct:TextValidationBehavior 
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            MaximumLength="250"
+                            MinimumLength="1"
+                            IsValid="{Binding ClientValidation.AddressValid}"
+                            />
+                    </Entry.Behaviors>
+                </Entry>
+
+                <Label Text="Street Name cannot be empty" TextColor="Red" IsVisible="{Binding ClientValidation.AddressValid, Converter={StaticResource invertBoolConverter}}"/>
+
+                <Label Text="Postcode" StyleClass="custom-label-two"/>
+
+                <Entry Text="{Binding Information.Postcode}" Placeholder="FY..." MaxLength="8" TextColor="Black">
+                    <Entry.Behaviors>
+                        <xct:TextValidationBehavior 
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            MaximumLength="8"
+                            MinimumLength="3"
+                             IsValid="{Binding ClientValidation.PostcodeValid}"
+                            />
+                    </Entry.Behaviors>
+                </Entry>
+
+                <Label Text="Postcode cannot be empty" TextColor="Red" IsVisible="{Binding ClientValidation.PostcodeValid, Converter={StaticResource invertBoolConverter}}"/>
+
+                <Label Text="Type of House" StyleClass="custom-label-two"/>
+
+                <Picker
+                    Title="Type of House"
+                    ItemsSource="{Binding Information.TypeOfHouseCollection}"
+                    SelectedItem="{Binding Information.TypeOfHouse}"
+                    TitleColor="#34495E"
+                />
+
+                <Label Text="Appointment Date" StyleClass="custom-label-two"/>
+
+                <DatePicker Date="{Binding CanvasDataBinding.AppointmentDate}"
+                            Format="D" />
+
+                <Label Text="Appointment Time" StyleClass="custom-label-two"/>
+
+                <TimePicker TextColor="Black" Time="{Binding CanvasDataBinding.AppointmentTime}" />
+
+                <CollectionView ItemsSource="{Binding TakenImages, Mode=TwoWay}" 
+                        ItemsLayout="VerticalGrid, 3"
+                        ItemSizingStrategy="MeasureAllItems" 
+                        SelectionMode="Single"
+                        SelectionChangedCommand="{Binding ImageTappedCommand}"
+                        SelectedItem="{Binding SelectedImage, Mode=TwoWay}"
+                        HeightRequest="{Binding CollectionViewHeight, Mode=TwoWay}"
+                        >
+                    <CollectionView.Behaviors>
+                    </CollectionView.Behaviors>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10" Margin="0" HeightRequest="100">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="130" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid Margin="0">
+                                    <Image Grid.Row="0" Source="{Binding Path}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
+                                    <Label Grid.Row="1" Text="{Binding Name}" FontSize="14" TextColor="Black" FontAttributes="Bold"  VerticalOptions="Start"/>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Add Photos" Background="Orange" Command="{Binding TakePhotoCommand}" HorizontalOptions="FillAndExpand"></Button>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                    <Button Text="Add Client" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+    
+</ContentPage>
