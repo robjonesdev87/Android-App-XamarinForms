@@ -1,4 +1,17 @@
-﻿using App1_0.API;
+﻿// ***********************************************************************
+// Assembly         : App1_0
+// Author           : Robert Jones
+// Created          : 04-10-2023
+//
+// Last Modified By : Robert Jones
+// Last Modified On : 04-14-2023
+// ***********************************************************************
+// <copyright file="SurveyorSingleViewModel.cs" company="App1_0">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using App1_0.API;
 using App1_0.Models;
 using App1_0.Models.PostData;
 using App1_0.Views.Surveyor;
@@ -16,37 +29,161 @@ using Xamarin.Forms;
 
 namespace App1_0.ViewModels.Surveyor
 {
+    /// <summary>
+    /// Class SurveyorSingleViewModel.
+    /// Implements the <see cref="App1_0.ViewModels.BaseViewModel" />
+    /// </summary>
+    /// <seealso cref="App1_0.ViewModels.BaseViewModel" />
     public class SurveyorSingleViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Gets or sets the modal popup command.
+        /// </summary>
+        /// <value>The modal popup command.</value>
         public Command ModalPopupCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the modal cancel command.
+        /// </summary>
+        /// <value>The modal cancel command.</value>
         public Command ModalCancelCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the client validation.
+        /// </summary>
+        /// <value>The client validation.</value>
         public ClientValidation ClientValidation { get; set; }
+        /// <summary>
+        /// Gets or sets the job accept command.
+        /// </summary>
+        /// <value>The job accept command.</value>
         public Command JobAcceptCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the job decline command.
+        /// </summary>
+        /// <value>The job decline command.</value>
         public Command JobDeclineCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the job complete command.
+        /// </summary>
+        /// <value>The job complete command.</value>
         public Command JobCompleteCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the job failure command.
+        /// </summary>
+        /// <value>The job failure command.</value>
         public Command JobFailureCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the error count.
+        /// </summary>
+        /// <value>The error count.</value>
         public int ErrorCount { get; set; } = 0;
+        /// <summary>
+        /// Gets or sets a value indicating whether [job decline section visible].
+        /// </summary>
+        /// <value><c>true</c> if [job decline section visible]; otherwise, <c>false</c>.</value>
         public bool JobDeclineSectionVisible { get; set; } = false;
+        /// <summary>
+        /// Gets or sets a value indicating whether [job failure section visible].
+        /// </summary>
+        /// <value><c>true</c> if [job failure section visible]; otherwise, <c>false</c>.</value>
         public bool JobFailureSectionVisible { get; set; } = false;
+        /// <summary>
+        /// Gets or sets a value indicating whether [hide all].
+        /// </summary>
+        /// <value><c>true</c> if [hide all]; otherwise, <c>false</c>.</value>
         public bool HideAll { get; set; } = false;
+        /// <summary>
+        /// Gets or sets a value indicating whether [hide accept buttons].
+        /// </summary>
+        /// <value><c>true</c> if [hide accept buttons]; otherwise, <c>false</c>.</value>
         public bool HideAcceptButtons { get; set; } = false;
+        /// <summary>
+        /// Gets or sets a value indicating whether [hide second stage].
+        /// </summary>
+        /// <value><c>true</c> if [hide second stage]; otherwise, <c>false</c>.</value>
         public bool HideSecondStage { get; set; } = false;
+        /// <summary>
+        /// Gets or sets a value indicating whether [show success fields].
+        /// </summary>
+        /// <value><c>true</c> if [show success fields]; otherwise, <c>false</c>.</value>
         public bool ShowSuccessFields { get; set; } = false;
+        /// <summary>
+        /// Gets or sets the deposit total.
+        /// </summary>
+        /// <value>The deposit total.</value>
         public string DepositTotal { get; set; }
+        /// <summary>
+        /// Gets or sets the total to be paid.
+        /// </summary>
+        /// <value>The total to be paid.</value>
         public string TotalToBePaid { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether [other surveysman accepted].
+        /// </summary>
+        /// <value><c>true</c> if [other surveysman accepted]; otherwise, <c>false</c>.</value>
         public bool OtherSurveysmanAccepted { get; set; } = false;
+        /// <summary>
+        /// Gets or sets a value indicating whether [declined client].
+        /// </summary>
+        /// <value><c>true</c> if [declined client]; otherwise, <c>false</c>.</value>
         public bool DeclinedClient { get; set; } = false;
+        /// <summary>
+        /// Gets or sets the status message.
+        /// </summary>
+        /// <value>The status message.</value>
         public string StatusMessage { get; set; } = string.Empty;
+        /// <summary>
+        /// Gets or sets a value indicating whether [job accepted].
+        /// </summary>
+        /// <value><c>true</c> if [job accepted]; otherwise, <c>false</c>.</value>
         public bool JobAccepted { get; set; } = false;
+        /// <summary>
+        /// Gets or sets the has errors.
+        /// </summary>
+        /// <value>The has errors.</value>
         public static List<string> HasErrors { get; set; }
+        /// <summary>
+        /// Gets or sets the inventory required.
+        /// </summary>
+        /// <value>The inventory required.</value>
         public string InventoryRequired { get; set; } = string.Empty;
+        /// <summary>
+        /// Gets or sets the measurements.
+        /// </summary>
+        /// <value>The measurements.</value>
         public string Measurements { get; set; } = string.Empty;
+        /// <summary>
+        /// Gets or sets the estimated cost.
+        /// </summary>
+        /// <value>The estimated cost.</value>
         public string EstimatedCost { get; set; } = string.Empty;
+        /// <summary>
+        /// Gets or sets the est staff required.
+        /// </summary>
+        /// <value>The est staff required.</value>
         public string EstStaffRequired { get; set; } = string.Empty;
+        /// <summary>
+        /// Gets or sets the final quote.
+        /// </summary>
+        /// <value>The final quote.</value>
         public string FinalQuote { get; set; } = string.Empty;
+        /// <summary>
+        /// Gets or sets the survey notes.
+        /// </summary>
+        /// <value>The survey notes.</value>
         public string SurveyNotes { get; set; } = string.Empty;
+        /// <summary>
+        /// Gets or sets the job.
+        /// </summary>
+        /// <value>The job.</value>
         public Job Job { get; set; }
+        /// <summary>
+        /// Gets or sets the client.
+        /// </summary>
+        /// <value>The client.</value>
         public Client Client { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SurveyorSingleViewModel"/> class.
+        /// </summary>
         public SurveyorSingleViewModel()
         {
             bool hasClient = Preferences.ContainsKey("Client");
@@ -133,6 +270,9 @@ namespace App1_0.ViewModels.Surveyor
                 }
             }
         }
+        /// <summary>
+        /// Modals the popup.
+        /// </summary>
         private async void ModalPopup()
         {
             if (isExecuting)
@@ -168,6 +308,9 @@ namespace App1_0.ViewModels.Surveyor
                 isExecuting = false;
             }
         }
+        /// <summary>
+        /// Jobs the accept.
+        /// </summary>
         private async void JobAccept()
         {
 
@@ -215,6 +358,9 @@ namespace App1_0.ViewModels.Surveyor
             }
 
         }
+        /// <summary>
+        /// Jobs the decline.
+        /// </summary>
         private async void JobDecline()
         {
             if (isExecuting)
@@ -255,6 +401,9 @@ namespace App1_0.ViewModels.Surveyor
                 isExecuting = false;
             }
         }
+        /// <summary>
+        /// Jobs the failure.
+        /// </summary>
         private async void JobFailure()
         {
             if (isExecuting)
@@ -301,6 +450,9 @@ namespace App1_0.ViewModels.Surveyor
                 isExecuting = false;
             }
         }
+        /// <summary>
+        /// Jobs the complete.
+        /// </summary>
         private async void JobComplete()
         {
 
@@ -393,6 +545,9 @@ namespace App1_0.ViewModels.Surveyor
             }
 
         }
+        /// <summary>
+        /// Modals the cancel.
+        /// </summary>
         private async void ModalCancel()
         {
             if (isExecuting)

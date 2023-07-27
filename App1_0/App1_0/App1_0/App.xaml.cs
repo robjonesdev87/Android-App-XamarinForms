@@ -1,4 +1,17 @@
-﻿using App1_0.API;
+﻿// ***********************************************************************
+// Assembly         : App1_0
+// Author           : Robert Jones
+// Created          : 10-30-2022
+//
+// Last Modified By : Robert Jones
+// Last Modified On : 07-18-2023
+// ***********************************************************************
+// <copyright file="App.xaml.cs" company="App1_0">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using App1_0.API;
 using App1_0.Models;
 using App1_0.Views;
 using Newtonsoft.Json;
@@ -15,12 +28,36 @@ using Microsoft.AppCenter.Distribute;
 
 namespace App1_0
 {
+    /// <summary>
+    /// Class App.
+    /// Implements the <see cref="Application" />
+    /// </summary>
+    /// <seealso cref="Application" />
     public partial class App : Application
     {
+        /// <summary>
+        /// Gets or sets the API user.
+        /// </summary>
+        /// <value>The API user.</value>
         public static JobUsers APIUser { get; set; } = new JobUsers();
+        /// <summary>
+        /// Gets or sets the settings.
+        /// </summary>
+        /// <value>The settings.</value>
         public static Settings Settings { get; set; } = new Settings();
+        /// <summary>
+        /// Gets or sets the API connect.
+        /// </summary>
+        /// <value>The API connect.</value>
         public static APIConnect APIConnect { get; set; } = new APIConnect();
+        /// <summary>
+        /// Gets or sets the json settings.
+        /// </summary>
+        /// <value>The json settings.</value>
         public static JsonSerializerSettings JsonSettings { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="App"/> class.
+        /// </summary>
         public App()
         {
             InitializeComponent();
@@ -48,6 +85,10 @@ namespace App1_0
 
         }
 
+        /// <summary>
+        /// Application developers override this method to perform actions when the application starts.
+        /// </summary>
+        /// <remarks>To be added.</remarks>
         protected override void OnStart()
         {
             CultureInfo englishGBCulture = new CultureInfo("en-GB");
@@ -65,10 +106,17 @@ namespace App1_0
 
 
 
+        /// <summary>
+        /// Application developers override this method to perform actions when the application enters the sleeping state.
+        /// </summary>
+        /// <remarks>To be added.</remarks>
         protected override void OnSleep()
         {
         }
 
+        /// <summary>
+        /// Called when [resume].
+        /// </summary>
         protected override void OnResume()
         {
         }

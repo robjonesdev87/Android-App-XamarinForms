@@ -1,4 +1,17 @@
-﻿using App1_0.Views;
+﻿// ***********************************************************************
+// Assembly         : App1_0
+// Author           : Robert Jones
+// Created          : 10-30-2022
+//
+// Last Modified By : Robert Jones
+// Last Modified On : 06-27-2023
+// ***********************************************************************
+// <copyright file="LoginViewModel.cs" company="App1_0">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using App1_0.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,10 +30,26 @@ using Plugin.FirebasePushNotification;
 
 namespace App1_0.ViewModels
 {
+    /// <summary>
+    /// Class LoginViewModel.
+    /// Implements the <see cref="App1_0.ViewModels.BaseViewModel" />
+    /// </summary>
+    /// <seealso cref="App1_0.ViewModels.BaseViewModel" />
     public class LoginViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Gets the login command.
+        /// </summary>
+        /// <value>The login command.</value>
         public Command LoginCommand { get; }
+        /// <summary>
+        /// Gets or sets the user login.
+        /// </summary>
+        /// <value>The user login.</value>
         public UserLogin UserLogin { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoginViewModel"/> class.
+        /// </summary>
         public LoginViewModel()
         {
             UserLogin = new UserLogin();
@@ -42,6 +71,9 @@ namespace App1_0.ViewModels
 
         }
 
+        /// <summary>
+        /// Automatics the login.
+        /// </summary>
         public async void AutoLogin()
         {
             try
@@ -139,6 +171,10 @@ namespace App1_0.ViewModels
             }
         }
 
+        /// <summary>
+        /// Called when [login clicked].
+        /// </summary>
+        /// <param name="obj">The object.</param>
         private async void OnLoginClicked(object obj)
         {
 

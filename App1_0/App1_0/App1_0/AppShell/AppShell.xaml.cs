@@ -1,4 +1,17 @@
-﻿using App1_0.API;
+﻿// ***********************************************************************
+// Assembly         : App1_0
+// Author           : Robert Jones
+// Created          : 11-02-2022
+//
+// Last Modified By : Robert Jones
+// Last Modified On : 07-05-2023
+// ***********************************************************************
+// <copyright file="AppShell.xaml.cs" company="App1_0">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using App1_0.API;
 using App1_0.Models;
 using App1_0.ViewModels;
 using App1_0.Views;
@@ -18,10 +31,22 @@ using Xamarin.Forms;
 
 namespace App1_0
 {
+    /// <summary>
+    /// Class AppShell.
+    /// Implements the <see cref="Shell" />
+    /// </summary>
+    /// <seealso cref="Shell" />
     public partial class AppShell : Shell
     {
+        /// <summary>
+        /// Gets or sets the API connect.
+        /// </summary>
+        /// <value>The API connect.</value>
         public APIConnect APIConnect { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AppShell"/> class.
+        /// </summary>
         public AppShell()
         {
             APIConnect = new APIConnect();
@@ -52,6 +77,11 @@ namespace App1_0
 
         }
 
+        /// <summary>
+        /// Logouts the clicked.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="args">The <see cref="EventArgs"/> instance containing the event data.</param>
         async void LogoutClicked(object sender, EventArgs args)
         {
             Settings.AccessToken = null;

@@ -1,4 +1,17 @@
-﻿using App1_0.API;
+﻿// ***********************************************************************
+// Assembly         : App1_0
+// Author           : Robert Jones
+// Created          : 01-20-2023
+//
+// Last Modified By : Robert Jones
+// Last Modified On : 07-18-2023
+// ***********************************************************************
+// <copyright file="CanvasDashboardViewModel.cs" company="App1_0">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using App1_0.API;
 using App1_0.Models;
 using App1_0.Views.Popups;
 using Microsoft.AppCenter.Distribute;
@@ -14,20 +27,72 @@ using Xamarin.Forms;
 
 namespace App1_0.ViewModels.Canvas
 {
+    /// <summary>
+    /// Class CanvasDashboardViewModel.
+    /// Implements the <see cref="App1_0.ViewModels.BaseViewModel" />
+    /// </summary>
+    /// <seealso cref="App1_0.ViewModels.BaseViewModel" />
     public class CanvasDashboardViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Gets or sets the API return.
+        /// </summary>
+        /// <value>The API return.</value>
         public APIReturn APIReturn { get; set; }
+        /// <summary>
+        /// Gets or sets the item tapped command.
+        /// </summary>
+        /// <value>The item tapped command.</value>
         public Command ItemTappedCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the add new lead command.
+        /// </summary>
+        /// <value>The add new lead command.</value>
         public Command AddNewLeadCommand { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether [action required].
+        /// </summary>
+        /// <value><c>true</c> if [action required]; otherwise, <c>false</c>.</value>
         public bool ActionRequired { get; set; }
+        /// <summary>
+        /// Gets or sets the clients.
+        /// </summary>
+        /// <value>The clients.</value>
         public ObservableCollection<Client> Clients { get; set; } = new ObservableCollection<Client>();
+        /// <summary>
+        /// Gets or sets the clients week.
+        /// </summary>
+        /// <value>The clients week.</value>
         public ObservableCollection<Client> ClientsWeek { get; set; } = new ObservableCollection<Client>();
+        /// <summary>
+        /// Gets or sets the clients two weeks.
+        /// </summary>
+        /// <value>The clients two weeks.</value>
         public ObservableCollection<Client> ClientsTwoWeeks { get; set; } = new ObservableCollection<Client>();
+        /// <summary>
+        /// Gets or sets the clients upcoming.
+        /// </summary>
+        /// <value>The clients upcoming.</value>
         public ObservableCollection<Client> ClientsUpcoming { get; set; } = new ObservableCollection<Client>();
+        /// <summary>
+        /// Gets or sets the welcome.
+        /// </summary>
+        /// <value>The welcome.</value>
         public string Welcome { get; set; } = "Welcome Back ";
+        /// <summary>
+        /// Gets or sets the index of the selected tab.
+        /// </summary>
+        /// <value>The index of the selected tab.</value>
         public int SelectedTabIndex { get; set; }
+        /// <summary>
+        /// Gets the show selected tab.
+        /// </summary>
+        /// <value>The show selected tab.</value>
         public string ShowSelectedTab { get { return $"Index: {SelectedTabIndex}"; } }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CanvasDashboardViewModel"/> class.
+        /// </summary>
         public CanvasDashboardViewModel()
         {
             ItemTappedCommand = new Command(ItemTapped);
@@ -38,7 +103,10 @@ namespace App1_0.ViewModels.Canvas
             }); 
 
         }
-        
+
+        /// <summary>
+        /// Refreshes the with canvas data.
+        /// </summary>
         public async void RefreshWithCanvasData()
         {
             Clients.Clear();
@@ -118,6 +186,10 @@ namespace App1_0.ViewModels.Canvas
             }
 
         }
+        /// <summary>
+        /// Items the tapped.
+        /// </summary>
+        /// <param name="selectedItem">The selected item.</param>
         public async void ItemTapped(object selectedItem)
         {
 
@@ -144,10 +216,18 @@ namespace App1_0.ViewModels.Canvas
 
 
         }
+        /// <summary>
+        /// Adds the new lead.
+        /// </summary>
+        /// <param name="selectedItem">The selected item.</param>
         public async void AddNewLead(object selectedItem)
         {
             await Shell.Current.GoToAsync("CanvasAddLeadPage");
         }
+        /// <summary>
+        /// Gets the open web command.
+        /// </summary>
+        /// <value>The open web command.</value>
         public ICommand OpenWebCommand { get; }
 
 

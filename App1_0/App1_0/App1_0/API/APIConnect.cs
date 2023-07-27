@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : App1_0
+// Author           : Robert Jones
+// Created          : 10-30-2022
+//
+// Last Modified By : Robert Jones
+// Last Modified On : 07-18-2023
+// ***********************************************************************
+// <copyright file="APIConnect.cs" company="App1_0">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Collections.Generic;
 using System.Text;
 using RestSharp;
@@ -13,9 +26,19 @@ using System.Net.Http;
 
 namespace App1_0.API
 {
+    /// <summary>
+    /// Class APIConnect.
+    /// </summary>
     public class APIConnect
     {
+        /// <summary>
+        /// Gets or sets the options.
+        /// </summary>
+        /// <value>The options.</value>
         public RestClientOptions Options { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="APIConnect"/> class.
+        /// </summary>
         public APIConnect()
         {
             Options = new RestClientOptions("https://windowshine-server.co.uk:2053")
@@ -26,6 +49,11 @@ namespace App1_0.API
                 //ThrowOnAnyError = true,
             };
         }
+        /// <summary>
+        /// Adds the client.
+        /// </summary>
+        /// <param name="client">The client.</param>
+        /// <returns>RestResponse.</returns>
         public RestResponse AddClient(Client client)
         {
 
@@ -52,6 +80,12 @@ namespace App1_0.API
 
             return response;
         }
+        /// <summary>
+        /// Logins the specified username.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <returns>dynamic.</returns>
         public dynamic Login(string username, string password)
         {
 
@@ -80,6 +114,10 @@ namespace App1_0.API
             }
 
         }
+        /// <summary>
+        /// Gets the logged in user.
+        /// </summary>
+        /// <returns>dynamic.</returns>
         public dynamic GetLoggedInUser()
         {
             if (Settings.AccessToken != null && Settings.AccessToken != "")
@@ -125,6 +163,11 @@ namespace App1_0.API
             return false;
         }
 
+        /// <summary>
+        /// Gets the user messages.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>dynamic.</returns>
         public dynamic GetUserMessages(string id)
         {
             if (Settings.AccessToken != null && Settings.AccessToken != "")
@@ -170,6 +213,11 @@ namespace App1_0.API
 
             return false;
         }
+        /// <summary>
+        /// Gets the user jobs.
+        /// </summary>
+        /// <param name="accessToken">The access token.</param>
+        /// <returns>ObservableCollection&lt;Job&gt;.</returns>
         public ObservableCollection<Job> GetUserJobs(string accessToken)
         {
 
@@ -197,6 +245,11 @@ namespace App1_0.API
             }
 
         }
+        /// <summary>
+        /// Gets all telesales clients.
+        /// </summary>
+        /// <param name="accessToken">The access token.</param>
+        /// <returns>ObservableCollection&lt;TelesalesClient&gt;.</returns>
         public ObservableCollection<TelesalesClient> GetAllTelesalesClients(string accessToken)
         {
 
@@ -226,6 +279,11 @@ namespace App1_0.API
             }
 
         }
+        /// <summary>
+        /// Gets the clients with job user.
+        /// </summary>
+        /// <param name="accessToken">The access token.</param>
+        /// <returns>ObservableCollection&lt;Client&gt;.</returns>
         public ObservableCollection<Client> GetClientsWithJobUser(string accessToken)
         {
 
@@ -254,6 +312,11 @@ namespace App1_0.API
             }
 
         }
+        /// <summary>
+        /// Gets the associated clients.
+        /// </summary>
+        /// <param name="accessToken">The access token.</param>
+        /// <returns>ObservableCollection&lt;Client&gt;.</returns>
         public ObservableCollection<Client> GetAssociatedClients(string accessToken)
         {
 
@@ -282,6 +345,12 @@ namespace App1_0.API
             }
 
         }
+        /// <summary>
+        /// Gets the job with identifier.
+        /// </summary>
+        /// <param name="clientId">The client identifier.</param>
+        /// <param name="jobId">The job identifier.</param>
+        /// <returns>Job.</returns>
         public Job GetJobWithId(string clientId, string jobId)
         {
 
@@ -313,6 +382,11 @@ namespace App1_0.API
             }
 
         }
+        /// <summary>
+        /// Gets the client with identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Client.</returns>
         public Client GetClientWithId(string id)
         {
             var restClient = new RestClient(Options)
@@ -341,6 +415,11 @@ namespace App1_0.API
                 return null;
             }
         }
+        /// <summary>
+        /// Updates the client.
+        /// </summary>
+        /// <param name="client">The client.</param>
+        /// <returns>RestResponse.</returns>
         public RestResponse UpdateClient(Client client)
         {
 
@@ -359,6 +438,11 @@ namespace App1_0.API
             return response;
 
         }
+        /// <summary>
+        /// Updates the tele sales client.
+        /// </summary>
+        /// <param name="client">The client.</param>
+        /// <returns>RestResponse.</returns>
         public RestResponse UpdateTeleSalesClient(TelesalesClient client)
         {
 
@@ -377,6 +461,10 @@ namespace App1_0.API
             return response;
 
         }
+        /// <summary>
+        /// Saves the geo location.
+        /// </summary>
+        /// <param name="location">The location.</param>
         public void SaveGeoLocation(string location)
         {
             var i = 0;
@@ -401,6 +489,10 @@ namespace App1_0.API
                 var response = restClient.Execute(request);
             }
         }
+        /// <summary>
+        /// Updates the firebase token.
+        /// </summary>
+        /// <param name="token">The token.</param>
         public void UpdateFirebaseToken(string token)
         {
             var i = 0;
@@ -425,6 +517,12 @@ namespace App1_0.API
                 var response = restClient.Execute(request);
             }
         }
+        /// <summary>
+        /// Uploads the images.
+        /// </summary>
+        /// <param name="clientId">The client identifier.</param>
+        /// <param name="images">The images.</param>
+        /// <returns>RestResponse.</returns>
         public RestResponse UploadImages(string clientId, ObservableCollection<ImageForUpload> images)
         {
             var restClient = new RestClient(Options);

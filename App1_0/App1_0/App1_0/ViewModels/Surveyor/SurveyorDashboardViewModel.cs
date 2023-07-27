@@ -1,4 +1,17 @@
-﻿using App1_0.API;
+﻿// ***********************************************************************
+// Assembly         : App1_0
+// Author           : Robert Jones
+// Created          : 12-08-2022
+//
+// Last Modified By : Robert Jones
+// Last Modified On : 04-27-2023
+// ***********************************************************************
+// <copyright file="SurveyorDashboardViewModel.cs" company="App1_0">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using App1_0.API;
 using App1_0.Models;
 using Newtonsoft.Json;
 using System;
@@ -13,20 +26,76 @@ using Xamarin.Forms;
 
 namespace App1_0.ViewModels.Surveyor
 {
+    /// <summary>
+    /// Class SurveyorDashboardViewModel.
+    /// Implements the <see cref="App1_0.ViewModels.BaseViewModel" />
+    /// </summary>
+    /// <seealso cref="App1_0.ViewModels.BaseViewModel" />
     public class SurveyorDashboardViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Gets or sets the API return.
+        /// </summary>
+        /// <value>The API return.</value>
         public APIReturn APIReturn { get; set; }
+        /// <summary>
+        /// Gets or sets the item tapped command.
+        /// </summary>
+        /// <value>The item tapped command.</value>
         public Command ItemTappedCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the welcome.
+        /// </summary>
+        /// <value>The welcome.</value>
         public string Welcome { get; set; } = "Welcome Back ";
+        /// <summary>
+        /// Gets or sets the clients.
+        /// </summary>
+        /// <value>The clients.</value>
         public ObservableCollection<Client> Clients { get; set; } = new ObservableCollection<Client>();
+        /// <summary>
+        /// Gets or sets the filtered clients.
+        /// </summary>
+        /// <value>The filtered clients.</value>
         public ObservableCollection<Client> FilteredClients { get; set; } = new ObservableCollection<Client>();
+        /// <summary>
+        /// Gets or sets the clients week.
+        /// </summary>
+        /// <value>The clients week.</value>
         public ObservableCollection<Client> ClientsWeek { get; set; } = new ObservableCollection<Client>();
+        /// <summary>
+        /// Gets or sets the clients two weeks.
+        /// </summary>
+        /// <value>The clients two weeks.</value>
         public ObservableCollection<Client> ClientsTwoWeeks { get; set; } = new ObservableCollection<Client>();
+        /// <summary>
+        /// Gets or sets the clients upcoming.
+        /// </summary>
+        /// <value>The clients upcoming.</value>
         public ObservableCollection<Client> ClientsUpcoming { get; set; } = new ObservableCollection<Client>();
+        /// <summary>
+        /// Gets or sets the expander.
+        /// </summary>
+        /// <value>The expander.</value>
         public ICommand Expander { set; get; }
+        /// <summary>
+        /// Gets or sets the json settings.
+        /// </summary>
+        /// <value>The json settings.</value>
         public JsonSerializerSettings JsonSettings { get; set; }
+        /// <summary>
+        /// Gets or sets the refresh data button command.
+        /// </summary>
+        /// <value>The refresh data button command.</value>
         public Command RefreshDataButtonCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the surveyor dashboard view model.
+        /// </summary>
+        /// <value>The surveyor dashboard view model.</value>
         public SurveyorDashboardViewModel surveyorDashboardViewModel { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SurveyorDashboardViewModel"/> class.
+        /// </summary>
         public SurveyorDashboardViewModel()
         {
             ItemTappedCommand = new Command(ItemTapped);
@@ -47,6 +116,9 @@ namespace App1_0.ViewModels.Surveyor
 
         }
 
+        /// <summary>
+        /// Refreshes the with survey data.
+        /// </summary>
         public async void RefreshWithSurveyData()
         {
             Clients.Clear();
@@ -128,6 +200,10 @@ namespace App1_0.ViewModels.Surveyor
             }
 
         }
+        /// <summary>
+        /// Items the tapped.
+        /// </summary>
+        /// <param name="selectedItem">The selected item.</param>
         public async void ItemTapped(object selectedItem)
         {
 
@@ -154,6 +230,10 @@ namespace App1_0.ViewModels.Surveyor
                 isExecuting = false;
             }
         }
+        /// <summary>
+        /// Gets the open web command.
+        /// </summary>
+        /// <value>The open web command.</value>
         public ICommand OpenWebCommand { get; }
     }
 }

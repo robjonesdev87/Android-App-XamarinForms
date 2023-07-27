@@ -1,4 +1,17 @@
-﻿using App1_0.API;
+﻿// ***********************************************************************
+// Assembly         : App1_0
+// Author           : Robert Jones
+// Created          : 12-08-2022
+//
+// Last Modified By : Robert Jones
+// Last Modified On : 04-13-2023
+// ***********************************************************************
+// <copyright file="CanvasSingleViewModel.cs" company="App1_0">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using App1_0.API;
 using App1_0.Models;
 using App1_0.Views.Surveyor;
 using System;
@@ -14,14 +27,42 @@ using Xamarin.Forms;
 
 namespace App1_0.ViewModels.Canvas
 {
+    /// <summary>
+    /// Class CanvasSingleViewModel.
+    /// Implements the <see cref="App1_0.ViewModels.BaseViewModel" />
+    /// </summary>
+    /// <seealso cref="App1_0.ViewModels.BaseViewModel" />
     public class CanvasSingleViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Gets or sets the update command.
+        /// </summary>
+        /// <value>The update command.</value>
         public Command UpdateCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the cancel command.
+        /// </summary>
+        /// <value>The cancel command.</value>
         public Command CancelCommand { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether [canvas complete].
+        /// </summary>
+        /// <value><c>true</c> if [canvas complete]; otherwise, <c>false</c>.</value>
         public bool CanvasComplete { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether [sales data not set].
+        /// </summary>
+        /// <value><c>true</c> if [sales data not set]; otherwise, <c>false</c>.</value>
         public bool SalesDataNotSet { get; set; } = false;
+        /// <summary>
+        /// Gets or sets the get client with identifier.
+        /// </summary>
+        /// <value>The get client with identifier.</value>
         public Client GetClientWithId { get; set; }
-   
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CanvasSingleViewModel"/> class.
+        /// </summary>
         public CanvasSingleViewModel()
         {
             UpdateCommand = new Command(UpdateClient);
@@ -47,11 +88,17 @@ namespace App1_0.ViewModels.Canvas
 
         }
 
+        /// <summary>
+        /// Called when [cancel].
+        /// </summary>
         private async void OnCancel()
         {
             await Shell.Current.GoToAsync("//CanvasDashboardPage");
         }
 
+        /// <summary>
+        /// Updates the client.
+        /// </summary>
         private async void UpdateClient()
         {
             try

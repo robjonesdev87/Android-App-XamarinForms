@@ -1,4 +1,17 @@
-﻿using App1_0.API;
+﻿// ***********************************************************************
+// Assembly         : App1_0
+// Author           : Robert Jones
+// Created          : 07-18-2023
+//
+// Last Modified By : Robert Jones
+// Last Modified On : 07-19-2023
+// ***********************************************************************
+// <copyright file="BaseViewModel.cs" company="App1_0">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using App1_0.API;
 using App1_0.Models;
 using App1_0.Views.Messages;
 using App1_0.Views.Popups;
@@ -24,40 +37,151 @@ using BasePermission = Xamarin.Essentials.Permissions.BasePermission;
 
 namespace App1_0.ViewModels
 {
+    /// <summary>
+    /// Class BaseViewModel.
+    /// Implements the <see cref="INotifyPropertyChanged" />
+    /// </summary>
+    /// <seealso cref="INotifyPropertyChanged" />
     public class BaseViewModel : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Gets or sets the settings.
+        /// </summary>
+        /// <value>The settings.</value>
         public Settings Settings { get; set; }
+        /// <summary>
+        /// Gets or sets the taken images.
+        /// </summary>
+        /// <value>The taken images.</value>
         public ObservableCollection<ImageForUpload> TakenImages { get; set; } = new ObservableCollection<ImageForUpload>();
+        /// <summary>
+        /// Gets or sets the user messages.
+        /// </summary>
+        /// <value>The user messages.</value>
         public ObservableCollection<UserMessages> UserMessages { get; set; } = new ObservableCollection<UserMessages>();
+        /// <summary>
+        /// Gets or sets the take photo command.
+        /// </summary>
+        /// <value>The take photo command.</value>
         public Command TakePhotoCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the add image command.
+        /// </summary>
+        /// <value>The add image command.</value>
         public Command AddImageCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the cancel image command.
+        /// </summary>
+        /// <value>The cancel image command.</value>
         public Command CancelImageCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the image tapped command.
+        /// </summary>
+        /// <value>The image tapped command.</value>
         public Command ImageTappedCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the update image command.
+        /// </summary>
+        /// <value>The update image command.</value>
         public Command UpdateImageCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the delete image command.
+        /// </summary>
+        /// <value>The delete image command.</value>
         public Command DeleteImageCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the open messages command.
+        /// </summary>
+        /// <value>The open messages command.</value>
         public Command OpenMessagesCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the message tapped command.
+        /// </summary>
+        /// <value>The message tapped command.</value>
         public Command MessageTappedCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the delete message command.
+        /// </summary>
+        /// <value>The delete message command.</value>
         public Command DeleteMessageCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the reply to message command.
+        /// </summary>
+        /// <value>The reply to message command.</value>
         public Command ReplyToMessageCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the message reply text.
+        /// </summary>
+        /// <value>The message reply text.</value>
         public string MessageReplyText { get; set; } = "";
+        /// <summary>
+        /// Gets or sets the image path.
+        /// </summary>
+        /// <value>The image path.</value>
         public string ImagePath { get; set; } = "";
+        /// <summary>
+        /// Gets or sets the name of the image.
+        /// </summary>
+        /// <value>The name of the image.</value>
         public string ImageName { get; set; } = "";
+        /// <summary>
+        /// Gets or sets the image description.
+        /// </summary>
+        /// <value>The image description.</value>
         public string ImageDescription { get; set; } = "";
+        /// <summary>
+        /// Gets or sets the selected image.
+        /// </summary>
+        /// <value>The selected image.</value>
         public ImageForUpload SelectedImage { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether [image add button visible].
+        /// </summary>
+        /// <value><c>true</c> if [image add button visible]; otherwise, <c>false</c>.</value>
         public bool ImageAddButtonVisible { get; set; } = true;
+        /// <summary>
+        /// Gets or sets a value indicating whether [image edit buttons visible].
+        /// </summary>
+        /// <value><c>true</c> if [image edit buttons visible]; otherwise, <c>false</c>.</value>
         public bool ImageEditButtonsVisible { get; set; } = false;
+        /// <summary>
+        /// Gets or sets the height of the collection view.
+        /// </summary>
+        /// <value>The height of the collection view.</value>
         public int CollectionViewHeight { get; set; } = 0;
+        /// <summary>
+        /// Gets or sets the user message.
+        /// </summary>
+        /// <value>The user message.</value>
         public UserMessages UserMessage { get; set; }
 
         //public User User { get; set; }
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        /// <returns></returns>
         public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// Notifies the property changed.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
         public virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        /// <summary>
+        /// Gets or sets the json settings.
+        /// </summary>
+        /// <value>The json settings.</value>
         public JsonSerializerSettings JsonSettings { get; set; }
 
+        /// <summary>
+        /// The is executing
+        /// </summary>
         public bool isExecuting = false;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseViewModel"/> class.
+        /// </summary>
         public BaseViewModel()
         {
 
@@ -89,6 +213,10 @@ namespace App1_0.ViewModels
             };
         }
 
+        /// <summary>
+        /// Take photo as an asynchronous operation.
+        /// </summary>
+        /// <returns>A Task representing the asynchronous operation.</returns>
         public async void TakePhotoAsync()
         {
             try
@@ -109,6 +237,11 @@ namespace App1_0.ViewModels
                 Console.WriteLine($"CapturePhotoAsync THREW: {ex.Message}");
             }
         }
+        /// <summary>
+        /// Load photo as an asynchronous operation.
+        /// </summary>
+        /// <param name="photo">The photo.</param>
+        /// <returns>A Task representing the asynchronous operation.</returns>
         public async Task LoadPhotoAsync(FileResult photo)
         {
             // canceled
@@ -134,6 +267,9 @@ namespace App1_0.ViewModels
             await PopupNavigation.Instance.PushAsync(new EditImage(this));
 
         }
+        /// <summary>
+        /// Adds the image.
+        /// </summary>
         public async void AddImage()
         {
             try
@@ -188,12 +324,18 @@ namespace App1_0.ViewModels
                 Console.WriteLine($"UpdateImage THREW: {ex.Message}");
             }
         }
+        /// <summary>
+        /// Cancels the image.
+        /// </summary>
         public async void CancelImage()
         {
             ResetImage();
             MessagingCenter.Send<object, string>(this, "BackButtonPressed", "");
 
         }
+        /// <summary>
+        /// Updates the image.
+        /// </summary>
         public async void UpdateImage()
         {
             var selectedImage = TakenImages.Where(x => x.Id == SelectedImage.Id).FirstOrDefault();
@@ -210,6 +352,9 @@ namespace App1_0.ViewModels
             MessagingCenter.Send<object, string>(this, "BackButtonPressed", "");
 
         }
+        /// <summary>
+        /// Deletes the image.
+        /// </summary>
         public async void DeleteImage()
         {
             var selectedImage = TakenImages.Where(x => x.Id == SelectedImage.Id).FirstOrDefault();
@@ -220,6 +365,9 @@ namespace App1_0.ViewModels
             MessagingCenter.Send<object, string>(this, "BackButtonPressed", "");
             ResetImage();
         }
+        /// <summary>
+        /// Resets the image.
+        /// </summary>
         public async void ResetImage()
         {
             ImageName = "";
@@ -230,6 +378,9 @@ namespace App1_0.ViewModels
             }
 
         }
+        /// <summary>
+        /// Images the tapped.
+        /// </summary>
         public async void ImageTapped()
         {
 
@@ -262,6 +413,10 @@ namespace App1_0.ViewModels
 
 
         }
+        /// <summary>
+        /// Checks the and request location permission.
+        /// </summary>
+        /// <returns>PermissionStatus.</returns>
         public async Task<PermissionStatus> CheckAndRequestLocationPermission()
         {
             var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
@@ -286,6 +441,10 @@ namespace App1_0.ViewModels
             return status;
         }
 
+        /// <summary>
+        /// Get location as an asynchronous operation.
+        /// </summary>
+        /// <returns>A Task representing the asynchronous operation.</returns>
         public async Task GetLocationAsync()
         {
 
@@ -318,6 +477,12 @@ namespace App1_0.ViewModels
 
         }
 
+        /// <summary>
+        /// Check and request permission as an asynchronous operation.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="permission">The permission.</param>
+        /// <returns>A Task&lt;PermissionStatus&gt; representing the asynchronous operation.</returns>
         public async Task<PermissionStatus> CheckAndRequestPermissionAsync<T>(T permission)
                     where T : BasePermission
         {
@@ -330,6 +495,9 @@ namespace App1_0.ViewModels
             return status;
         }
 
+        /// <summary>
+        /// Refreshes the messages.
+        /// </summary>
         public async void RefreshMessages()
         {
             var APIConnect = new APIConnect();
@@ -338,6 +506,9 @@ namespace App1_0.ViewModels
             NotifyPropertyChanged("UserMessages");
         }
 
+        /// <summary>
+        /// Opens the messages.
+        /// </summary>
         public async void OpenMessages()
         {
             try
@@ -351,6 +522,9 @@ namespace App1_0.ViewModels
             }
         }
 
+        /// <summary>
+        /// Deletes the message.
+        /// </summary>
         public async void DeleteMessage()
         {
             try
@@ -363,6 +537,9 @@ namespace App1_0.ViewModels
             }
         }
 
+        /// <summary>
+        /// Replies to message.
+        /// </summary>
         public async void ReplyToMessage()
         {
             try
@@ -375,6 +552,10 @@ namespace App1_0.ViewModels
             }
         }
 
+        /// <summary>
+        /// Messages the tapped.
+        /// </summary>
+        /// <param name="selectedItem">The selected item.</param>
         public async void MessageTapped(object selectedItem)
         {
             try
@@ -392,6 +573,9 @@ namespace App1_0.ViewModels
             }
         }
 
+        /// <summary>
+        /// Checks the middleware.
+        /// </summary>
         public async void CheckMiddleware()
         {
             if (Settings.AccessToken == "" || Settings.AccessToken == null)

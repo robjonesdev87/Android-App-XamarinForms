@@ -1,4 +1,17 @@
-﻿using App1_0.Models;
+﻿// ***********************************************************************
+// Assembly         : App1_0
+// Author           : Robert Jones
+// Created          : 12-08-2022
+//
+// Last Modified By : Robert Jones
+// Last Modified On : 04-25-2023
+// ***********************************************************************
+// <copyright file="CanvasAddLeadViewModel.cs" company="App1_0">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using App1_0.Models;
 using System;
 using Xamarin.Forms;
 using App1_0.API;
@@ -11,16 +24,56 @@ using Xamarin.Essentials;
 
 namespace App1_0.ViewModels.Canvas
 {
+    /// <summary>
+    /// Class CanvasAddLeadViewModel.
+    /// Implements the <see cref="App1_0.ViewModels.BaseViewModel" />
+    /// </summary>
+    /// <seealso cref="App1_0.ViewModels.BaseViewModel" />
     public class CanvasAddLeadViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Gets the information.
+        /// </summary>
+        /// <value>The information.</value>
         public Information Information { get; }
+        /// <summary>
+        /// Gets the canvas data binding.
+        /// </summary>
+        /// <value>The canvas data binding.</value>
         public CanvasData CanvasDataBinding { get; }
+        /// <summary>
+        /// Gets or sets the client validation.
+        /// </summary>
+        /// <value>The client validation.</value>
         public ClientValidation ClientValidation { get; set; }
+        /// <summary>
+        /// Gets or sets the save command.
+        /// </summary>
+        /// <value>The save command.</value>
         public Command SaveCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the cancel command.
+        /// </summary>
+        /// <value>The cancel command.</value>
         public Command CancelCommand { get; set; }
+        /// <summary>
+        /// Gets or sets the selected date.
+        /// </summary>
+        /// <value>The selected date.</value>
         public DatePicker SelectedDate { get; set; }
+        /// <summary>
+        /// Returns true if ... is valid.
+        /// </summary>
+        /// <value><c>true</c> if this instance is valid; otherwise, <c>false</c>.</value>
         public bool IsValid { get; set; }
+        /// <summary>
+        /// Gets or sets the has errors.
+        /// </summary>
+        /// <value>The has errors.</value>
         public static List<string> HasErrors { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CanvasAddLeadViewModel"/> class.
+        /// </summary>
         public CanvasAddLeadViewModel()
         {
             Information = new Information();
@@ -75,11 +128,17 @@ namespace App1_0.ViewModels.Canvas
 
         }
 
+        /// <summary>
+        /// Called when [cancel].
+        /// </summary>
         private async void OnCancel()
         {
             await Shell.Current.GoToAsync("//CanvasDashboardPage");
         }
 
+        /// <summary>
+        /// Called when [save].
+        /// </summary>
         private async void OnSave()
         {
 
